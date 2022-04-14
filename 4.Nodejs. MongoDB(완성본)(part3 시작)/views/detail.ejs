@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <!-- Bootstrap CSS : 부트스트랩 사이트에서 CSS를 가져옴-->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
+      integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn"
+      crossorigin="anonymous"
+    />
+
+    <!-- CSS 넣는 법 -->
+    <link rel="stylesheet" href="/public/main.css">
+
+    <title>Hello, world!</title>
+  </head>
+  <body>
+ 
+  <!-- nav.html을 첨부해주세요 -->
+  <%- include('nav.html') %>
+
+  <div class="container mt-4">
+    <h4 class="text-center">상세페이지</h4>
+
+    <div class="card" style="width: 100%;">
+      <div class="card-body">
+        <h5 class="card-title"><%= data.제목 %></h5>
+        <h6 class="card-subtitle mb-2 text-muted"> <%= data.날짜 %></h6>
+        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        <a href="#" class="card-link">수정하기</a>
+        <a href="#" class="card-link">Another link</a>
+      </div>
+    </div>
+  </div>
+
+    <!-- Optional JavaScript; choose one of the two! -->
+    <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF"
+      crossorigin="anonymous"
+    ></script>
+
+  </body>
+</html>

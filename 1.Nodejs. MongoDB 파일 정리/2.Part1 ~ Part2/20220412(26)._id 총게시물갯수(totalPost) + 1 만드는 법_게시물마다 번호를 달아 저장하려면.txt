@@ -1,0 +1,18 @@
+*server.js
+
+// 주제 : _id: 총게시물갯수(totalPost) + 1 만드는 법
+//1단계 : DB에 'counter' collection 생성 -> Insert Document 생성(사진)
+app.post("/add", function (요청, 응답) {
+  응답.send("전송완료");
+
+  // findOne : counter collection에서 데이터 하나를 찾고 싶다.
+  // name이 게시물갯수인 데이터를 찾아주세요. 
+  db.collection('counter').findOne({
+    name : '게시물갯수'}, function(에러, 결과){ console.log(결과.totalPost);
+
+    var 총게시물갯수 = 결과.totalPost;
+  
+    db.collection('post').insertOne({_id:총게시물갯수, 제목 : 요청.body.title, 날짜: 요청.body.date}, function (에러, 결과) {
+      console.log("저장완료");
+    });
+  });

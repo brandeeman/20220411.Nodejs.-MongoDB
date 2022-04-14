@@ -1,0 +1,27 @@
+부트스트랩이란? 복붙만으로 개발할 수 있게 만들어줌
+검색 예) button
+
+---
+
+*주제 : 설치 방법
+구글 검색 : bootstrap -> get started -> 부트스트랩 버전 설정
+
+(참고)
+Bootstrap v5는 IE지원 X
+Bootstrap v4는 IE11+
+Bootstrap v3은 IE9+
+
+-> 내려와서 : Starter template(이걸로 html 다 갈아치우기)
+
+--
+
+*검색
+ <!-- 상단 바 검색 : Navbar -->
+ <!-- 대문 검색 : Jombotron -->
+
+---
+
+*검색2
+<div class="container mt-4">
+<div class="form-group">
+button

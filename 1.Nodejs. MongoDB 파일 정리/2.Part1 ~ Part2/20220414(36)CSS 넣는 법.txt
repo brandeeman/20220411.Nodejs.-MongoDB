@@ -1,0 +1,9 @@
+*detail.ejs
+<!-- CSS 넣는 법 -->
+    <link rel="stylesheet" href="/public/main.css">
+
+---
+
+*server.js
+//'미들웨어'로 public 폴더 쓸 거다 명시
+app.use('/public', express.static('public'));

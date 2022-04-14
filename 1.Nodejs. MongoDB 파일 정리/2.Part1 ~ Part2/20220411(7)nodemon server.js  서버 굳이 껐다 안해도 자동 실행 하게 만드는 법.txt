@@ -1,0 +1,14 @@
+*서버 굳이 껐다 안해도 자동 실행 하게 만드는 법
+
+-설치 : 터미널 
+>npm install -g nodemon
+
+-실행 : 터미널
+>nodemon server.js     
+
+-안될 때 : 관리자 권한 터미널 
+>executionpolicy 입력 -> Restricted 나오면 잘못된 것
+>set-executionpolicy unrestricted
+>y -> 'enter'
+
+---

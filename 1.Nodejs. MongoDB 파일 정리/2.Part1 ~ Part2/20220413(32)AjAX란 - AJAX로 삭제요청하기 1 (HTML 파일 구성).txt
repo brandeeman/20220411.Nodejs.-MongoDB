@@ -1,0 +1,48 @@
+-서버랑 통신을 할 수 있는 자바스크립트 문법
+
+-새로고침 없이 서버에 요청하는 걸 도와줌
+
+---
+
+*list.ejs
+
+<script>
+
+     //jQuery 라이브러리 도움을 받은 AJAX요청
+      $.ajax()
+
+</script>
+
+---
+
+*list.ejs
+
+<!-- jqeury 첨부(아래 있던 것 가져와서 수정) -->
+    <script
+    src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+    <!-- AJAX 사용법 -->
+    <script>
+
+      //.done : AJAX 문법이 성공했을 때 .done을 실행해 주세요.
+      // $.ajax({
+      //   method : 'DELETE',
+      //   url : '요청할 경로', 
+      //   data : '요청과 함께 보낼데이터'
+      // }).done(function(결과){});
+
+      $.ajax({
+        method : 'DELETE',
+        url : '/delete', 
+        data : '게시물번호'
+      }).done(function(결과){});
+    </script>
+
+---
+
+*server.js
+
+//삭제 요청 만드는 법
+app.delete('/delete', function(요청, 응답){
+  console.log(요청.body)
+})

@@ -1,0 +1,40 @@
+*server.js
+
+//detail로 접속하면 detail.ejs 보여줌
+//detail2로 접속하면 detail2.ejs 보여줌
+//detail4로 접속하면 detail4.ejs 보여줌
+// =>
+// 간략화 방법
+
+// app.get('/detail/:작명하기', funtion(요청, 응답){
+//   응답.render('detail.ejs', {이런이름으로: 이런데이터를})
+// });
+
+// app.get('/detail/:id', funtion(요청, 응답){
+//   // post collection 중에 _id가 1인 게시물을 찾아와 주세요. 그 후 결과를 출력함
+//   db.collection('post').findOne({_id: detail/뒤에있는 숫자 넣기}, function(에러, 결과){
+//     console.log(결과);
+//     응답.render('detail.ejs', {이런이름으로: 이런데이터를})
+//   })
+// });
+
+// 요청.params.id : url의 parameter 중에 id라고 이름지은 파라미터를 집어넣음
+app.get('/detail/:id', function(요청, 응답){
+  db.collection('post').findOne({_id : parseInt(요청.params.id)}, function(에러, 결과){
+    console.log(결과);
+    응답.render('detail.ejs', { data : 결과 });
+  })
+});
+
+---
+
+*detail.ejs
+-detail.ejs 생성
+
+    <h4>상세페이지</h4>
+
+    <!-- <h4>제목: 2번 게심루의 data.제목</h4>
+    <h4>날짜: 2번 게심루의 data.날짜</h4> -->
+
+    <h4>제목: <%= data.제목 %></h4>
+    <h4>날짜: <%= data.날짜 %></h4>

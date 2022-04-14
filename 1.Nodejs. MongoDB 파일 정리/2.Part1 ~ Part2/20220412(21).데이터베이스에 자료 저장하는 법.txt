@@ -1,0 +1,49 @@
+database : 공간
+collection : 파일들
+
+---
+
+*server.js
+
+// 서버 오픈 문법
+
+// 아까 설치한 라이브러리를 첨부해주세요.
+const express = require("express");
+// 첨부한 라이브러리를 가지고 객체를 만들어주세요.
+const app = express();
+
+// bodyParser 라이브러리 사용법
+const bodyParser = require("body-parser");
+app.use(bodyParser.urlencoded({ extended: true }));
+
+//전에 작성한 app.listen 옮겨오기
+//mongodb 접속 완료되면 app.listen 실행해 주세요.
+const MongoClient = requrie("mongodb").MongoClient;
+MongoClient.connect(
+  "mongodb+srv://admin:1234@cluster0.8rr3j.mongodb.net/todoapp?retryWrites=true&w=majority",
+  function (에러, client) {
+    //에러가 발생했을 때 어떤 에러인지 알려줌
+    if (에러) {
+      return console.log(에러);
+    }
+
+    // todoapp이라는 db로 연결
+    db = client.db("todoapp");
+
+    // db.collection('post').insertOne('저장할데이터', function(에러, 결과){
+    //   console.log('저장완료');
+    // });
+
+    // insertOne : post라는 파일에 '저장할데이터'를 저장해 주세요.
+    db.collection("post").insertOne(
+      { _id:100, 이름: "Jone", 나이: 20 },
+      function (에러, 결과) {
+        console.log("저장완료");
+      }
+    );
+
+    app.listen(8080, function () {
+      console.log("listening on 8080");
+    });
+  }
+);
