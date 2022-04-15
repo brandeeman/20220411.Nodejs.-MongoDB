@@ -9,6 +9,10 @@ app.use('/public', express.static('public'));
 const bodyParser = require("body-parser");
 app.use(bodyParser.urlencoded({ extended: true }));
 
+//methodOverride 라이브러리 설정 : 2줄
+const methodOverride = require('method-override');
+app.use(methodOverride('_method'));
+
 //mongodb 접속 완료되면 app.listen 실행해 주세요.
 const MongoClient = require('mongodb').MongoClient;
 MongoClient.connect("mongodb+srv://admin:qwer1234@cluster0.8rr3j.mongodb.net/todoapp?retryWrites=true&w=majority", function(에러, client){
@@ -83,5 +87,17 @@ app.get('/detail/:id', function(요청, 응답){
   db.collection('post').findOne({_id : parseInt(요청.params.id)}, function(에러, 결과){
     console.log(결과);
     응답.render('detail.ejs', { data : 결과 });
-  })
+  });
+});
+
+//
+
+//edit 기능
+app.get('/edit/:id',function(요청, 응답){
+  db.collection('post').findOne({_id : parseInt(요청.params.id)}, function(에러, 결과){
+    //숙제 : 에러코드가 발생했을 경우 try-catche 어떻게 쓸까?
+
+    console.log(결과);
+    응답.render('edit.ejs', { post :  결과 });
+  });
 });
