@@ -101,3 +101,7 @@ app.get('/edit/:id',function(요청, 응답){
     응답.render('edit.ejs', { post :  결과 });
   });
 });
+
+app.put('/edit', function(){
+  //폼에담긴 제목 데이터 
+});
