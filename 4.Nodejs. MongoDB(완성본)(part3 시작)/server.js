@@ -20,6 +20,7 @@ MongoClient.connect("mongodb+srv://admin:qwer1234@cluster0.8rr3j.mongodb.net/tod
   if (에러) return console.log(에러);
 
   db = client.db("todoapp");
+  // db = client;
 
   app.listen('8080', function(){
     console.log('listening on 8080')
@@ -102,8 +103,16 @@ app.get('/edit/:id',function(요청, 응답){
   });
 });
 
-app.put('/edit', function(){
-  //폼에담긴 제목 데이터 
+//update 함수 쓰는 법
+app.put('/edit', function(요청, 응답){
+  //폼에담긴 제목 데이터, 날짜 데이터를 가지고 db.collection 에다가 업데이트함
+  //set : update 해주세요. 없으면 추가해주세요.
+  db.collection('post').updateOne({_id : parseInt(요청.body.id)},{$set : {제목:요청.body.title, 날짜:요청.body.date}}, function(에러, 결과){
+    console.log("수정완료");
+
+    // 업데이트 후 다른 페이지로 이동하는 코드
+    응답.redirect('/list');
+  });
 });
 
 // const passport = require('passport');
