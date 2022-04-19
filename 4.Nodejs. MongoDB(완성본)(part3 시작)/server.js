@@ -115,4 +115,48 @@ app.put('/edit', function(요청, 응답){
   });
 });
 
-// const passport = require('passport');
+//
+// 로그인 페이지 만들기
+
+// passport 라이브러리를 쓰겠다. 라이브러리들을 쓰겠다.
+const passport = require('passport');
+const LocalStrategy = require('passport-local').Strategy;
+const session = require('express-session');
+
+// app.use : 미들웨어. 이해하고 쓰는 것 아님
+// 미들웨어 : 요청. 응답 사이에 작동함
+app.use(session({secret:'비밀코드', resave: true, saveUninitialized: false}));
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.get('/login', function(요청, 응답){
+  응답.render('login.ejs');
+});
+
+//passport.authenticate() : 인증해달라는 의미
+app.post('/login', passport.authenticate('local',{failureRedirect:'/fail'}), function(요청, 응답){
+  //아이디, 비번 맞으면 로그인 성공페이지로 보내줘야 함
+  응답.redirect('/');
+});
+
+//LocalStrategy 인증 방식
+passport.use(new LocalStrategy({
+  // 유저가 입력한 아이디/비번 항목이 뭔지 정의
+  usernameField: 'id',
+  passwordField: 'pw',
+  // 로그인 후 세션에 저장할 것인가?
+  session: true,
+  passReqToCallback: false,
+}, function (입력한아이디, 입력한비번, done) {
+  //console.log(입력한아이디, 입력한비번);
+  db.collection('login').findOne({ id: 입력한아이디 }, function (에러, 결과) {
+    if (에러) return done(에러)
+
+    if (!결과) return done(null, false, { message: '존재하지않는 아이디요' })
+    if (입력한비번 == 결과.pw) {
+      return done(null, 결과)
+    } else {
+      return done(null, false, { message: '비번틀렸어요' })
+    }
+  })
+}));
